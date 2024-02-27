@@ -14,10 +14,6 @@ public class Character {
 	private Stat attack;
 	private Stat defense;
 	
-	public String getName() {
-		return this.name;
-	}
-	
 	public void attack(Character target){
 		System.out.printf("%s attacks %s!%n%n", this.getName(), target.getName());
 		target.defend(this.getAttack());
@@ -41,6 +37,10 @@ public class Character {
 	
 	public boolean isAlive() {
 		return this.getHealth().getValue() > 0;
+	}
+	
+	public String getName() {
+		return this.name;
 	}
 
 	public Health getHealth() {

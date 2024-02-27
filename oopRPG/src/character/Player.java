@@ -44,7 +44,7 @@ public class Player extends Character{
 	public boolean hasLeveledUp() {
 		if(experience > nextLevel) {
 			System.out.printf("%s have leveled up!%n%n", this.getName());
-			level++;
+			this.level++;
 			this.experience -= this.nextLevel;
 			this.nextLevel = 10 * this.level;
 			this.getHealth().levelUp(10);
