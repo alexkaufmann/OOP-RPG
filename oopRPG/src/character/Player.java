@@ -1,5 +1,11 @@
 package character;
 
+import java.util.Enumeration;
+
+import attributes.StatType;
+import equipment.EquipmentBlock;
+import item.Equipable;
+
 public class Player extends Character{
 
 	//
@@ -8,6 +14,7 @@ public class Player extends Character{
 		this.level = 1;
 		this.experience = 0;
 		this.nextLevel = 10;
+		this.equipment = new EquipmentBlock();
 	}
 	
 	public Player(String name, int health, int attack, int defense, int level) {
@@ -15,6 +22,7 @@ public class Player extends Character{
 		this.level = level;
 		this.experience = 0;
 		this.nextLevel = 10 * level;
+		this.equipment = new EquipmentBlock();
 	}
 	
 	public Player(String name, int health, int attack, int defense, int level, int experience) {
@@ -22,8 +30,11 @@ public class Player extends Character{
 		this.level = level;
 		this.experience = experience;
 		this.nextLevel = 10 * level;
+		this.equipment = new EquipmentBlock();
 	}
 
+	private EquipmentBlock equipment;
+	
 	private int level;
 	private int experience;
 	private int nextLevel;
@@ -54,6 +65,26 @@ public class Player extends Character{
 			return true;
 		}else {
 			return false;
+		}
+	}
+	
+	public void equip(Equipable equipment) {
+		this.equipment.equip(equipment);
+		this.checkEquipment();
+	}
+	
+	public void checkEquipment() {
+		Enumeration<StatType> e = this.getStats().getEnum();
+		
+		while(e.hasMoreElements()) {
+			StatType type = e.nextElement();
+			int effect = this.equipment.getEffect(type);
+			if(effect > 0) {
+				this.getStats().get(type).buff(effect);
+			}else {
+				this.getStats().get(type).debuff(effect);
+			}
+			
 		}
 	}
 }

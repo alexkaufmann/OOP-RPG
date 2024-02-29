@@ -1,9 +1,13 @@
 package engine;
 
 import character.Player;
+import item.Weapon;
 import character.NPC;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+
+import attributes.Stat;
+import attributes.StatType;
 
 public class Gameplay {
 	
@@ -16,11 +20,19 @@ public class Gameplay {
 		Player player = new Player("Fighter", 10, 4, 2);
 		NPC npcs[] = new NPC[rand.nextInt(4) + 1];
 		
+		System.out.print(player);
+		
+		Weapon sword = new Weapon("Sword", new Stat[]{new Stat("Attack", 2, StatType.ATTACK)});
+		
+		player.equip(sword);
+		
+		System.out.print(player);
+		
 		for(int i = 0; i < npcs.length; i++) {
 			npcs[i] = new NPC("Goblin " + (i + 1), rand.nextInt(5) + 5, rand.nextInt(3) + 2, rand.nextInt(3) + 2, rand.nextInt(5) + 5);
 		}
 		
-		System.out.printf("You have encoutered %d goldins!%n%n", npcs.length);
+		System.out.printf("You have encoutered %d goblins!%n%n", npcs.length);
 		
 		while(player.isAlive() && allAlive(npcs)) {
 			try {
@@ -39,7 +51,7 @@ public class Gameplay {
 		}
 		
 		if(player.isAlive()) {
-			System.out.printf("You have defeated the goldins!%n%n");
+			System.out.printf("You have defeated the goblins!%n%n");
 		}else {
 			System.out.printf("GAME OVER!");
 		}

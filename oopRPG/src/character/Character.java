@@ -1,18 +1,19 @@
 package character;
 
+import attributes.Health;
+import attributes.Stat;
+import attributes.StatBlock;
+import attributes.StatType;
+
 public class Character {
 	//Constructor
 	public Character(String name, int health, int attack, int defense) {
 		this.name = name;
-		this.health = new Health(health);
-		this.attack = new Stat("Attack", attack);
-		this.defense = new Stat("Defense", defense);
+		this.stats = new StatBlock(health, attack, defense);
 	}
 	
 	private String name;
-	private Health health;
-	private Stat attack;
-	private Stat defense;
+	private StatBlock stats;
 	
 	public void attack(Character target){
 		System.out.printf("%s attacks %s!%n%n", this.getName(), target.getName());
@@ -42,20 +43,31 @@ public class Character {
 	public String getName() {
 		return this.name;
 	}
+	
+	public StatBlock getStats() {
+		return this.stats;
+	}
 
 	public Health getHealth() {
-		return health;
+		return (Health) stats.get(StatType.HEALTH);
 	}
 
 	public Stat getAttack() {
-		return attack;
+		return stats.get(StatType.ATTACK);
 	}
 
 	public Stat getDefense() {
-		return defense;
+		return stats.get(StatType.DEFENSE);
 	}
 	
 	
-	
+	public String toString() {
+		return String.format(
+				"-----------------------%n" +
+				"%s Stats: %n%n" + 
+				stats +
+				"-----------------------%n%n", 
+				this.name);
+	}
 	
 }

@@ -1,9 +1,9 @@
-package character;
+package attributes;
 
 public class Health extends Stat{
 
 	public Health(int value) {
-		super("Health", value);
+		super("Health", value, StatType.HEALTH);
 	}
 	
 	public void heal(int value) {

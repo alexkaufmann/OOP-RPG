@@ -1,12 +1,13 @@
-package character;
+package attributes;
 
 public class Stat {
 	
 	//Constructor
-	public Stat(String name, int value) {
+	public Stat(String name, int value, StatType type) {
 		this.name = name;
 		this.currentValue = value;
 		this.baseValue = value;
+		this.type = type;
 	}
 
 	//Name of stat
@@ -15,6 +16,8 @@ public class Stat {
 	private int currentValue;
 	//Base value of stat
 	private int baseValue;
+	//Type of stat
+	private StatType type;
 	
 	//Get Name
 	public String getName() {
@@ -28,6 +31,10 @@ public class Stat {
 	
 	public int getBaseValue() {
 		return this.baseValue;
+	}
+	
+	public StatType getType() {
+		return this.type;
 	}
 	
 	//Increase currentValue
@@ -48,6 +55,10 @@ public class Stat {
 	//Rest currentValue to baseValue
 	public void reset() {
 		this.currentValue = this.baseValue;
+	}
+	
+	public String toString() {
+		return String.format("   %-10s: %d %n%n", this.name, this.currentValue);
 	}
 	
 }
